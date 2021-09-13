@@ -49,3 +49,10 @@ function findByArtist(artist) {
   } // end for
   return results;
 }
+
+console.log('Test: should return empty array:', findByArtist('Looneys')); // test for artist not found
+console.log('Test: should return one record by F. Alse Etto:', findByArtist('F. Alse Etto')); // test for artist known to be in collection
+// test for multiple records by the same artist - adding more records by same artist
+addToCollection("Sit. Type. Meet.", "The Office Workers", 2007);
+addToCollection("Thank Goodness It's Lunch", "The Office Workers", 2013);
+console.log('Test: should return three records by The Office Workers', findByArtist('The Office Workers'));
