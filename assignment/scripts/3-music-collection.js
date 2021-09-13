@@ -39,3 +39,13 @@ function showCollection(collectionArray) {
 
 // to test the showCollection function
 showCollection(collection);
+
+function findByArtist(artist) {
+  const results = []; // empty array to hold results
+  for (const item of collection) { // loop through collection
+    if (item.artist === artist) { // if the current record in the collection is by the artist
+      results.push(item); // add this record to results
+    }
+  } // end for
+  return results;
+}
