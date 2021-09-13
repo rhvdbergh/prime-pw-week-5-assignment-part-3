@@ -26,3 +26,9 @@ console.log(`A new record has been added, let's party like it's '46: ${record.ti
 record = addToCollection("Fax. Scan. Copy.", "The Office Workers", 2003);
 console.log(`A new record has been added, and it's great for stress relief: ${record.title}, ${record.artist}, ${record.yearPublished}`);
 console.log('The complete music collection: ', collection);
+
+function showCollection(collectionArray) {
+  console.log(`There are ${collectionArray.length} items in this collection.`);
+}
+
+showCollection(collection);
