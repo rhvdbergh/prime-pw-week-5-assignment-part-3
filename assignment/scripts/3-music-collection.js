@@ -29,6 +29,13 @@ console.log('The complete music collection: ', collection);
 
 function showCollection(collectionArray) {
   console.log(`There are ${collectionArray.length} items in this collection.`);
+  console.log('-----------------');
+  console.log('These items are:');
+  console.log('-----------------');
+  for (const item of collectionArray) {
+    console.log(`"${item.title}" by ${item.artist}, published in ${item.yearPublished}`);
+  }
 }
 
+// to test the showCollection function
 showCollection(collection);
