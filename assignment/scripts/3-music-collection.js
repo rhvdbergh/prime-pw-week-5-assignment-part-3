@@ -85,6 +85,8 @@ const searchTestObj = {
   year: 2021
 }
 
+// can pass any combination of search criteria (year, artist, and/or trackName) to searchTerm
+// search will only return a direct match based on the give search criteria
 function search(searchTerms) {
   const result = []; // array to store all found records
   for (const item of collection) {
