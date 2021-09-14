@@ -29,11 +29,14 @@ console.log('The complete music collection: ', collection);
 
 function showCollection(collectionArray) {
   console.log(`There are ${collectionArray.length} items in this collection.`);
-  console.log('-----------------');
-  console.log('These items are:');
-  console.log('-----------------');
-  for (const item of collectionArray) {
-    console.log(`"${item.title}" by ${item.artist}, published in ${item.yearPublished}`);
+  if (collectionArray.length > 0) {
+    console.log('-----------------');
+    console.log('These items are:');
+    console.log('-----------------');
+
+    for (const item of collectionArray) {
+      console.log(`"${item.title}" by ${item.artist}, published in ${item.yearPublished}`);
+    }
   }
 }
 
@@ -82,10 +85,10 @@ console.log('Should return 2 Fuzzy Smokes albums from 1987 and 2021:');
 console.log(showCollection(search(searchTestObj)));
 console.log('TEST 2');
 console.log('Should return 1 Deaff Platinum album from 1987:');
-console.log(search({
+console.log(showCollection(search({
   artist: 'Deaff Platinum',
   year: 1987
-}));
+})));
 console.log('TEST 3');
 console.log('Should return 0 albums - both artist and year not in collection');
 console.log(showCollection(search({
@@ -94,10 +97,10 @@ console.log(showCollection(search({
 })));
 console.log('TEST 4');
 console.log('Should return 0 albums - artist in collection, but not year');
-console.log(search({
+console.log(showCollection(search({
   artist: 'Deaff Platinum',
   year: 2012
-}));
+})));
 
 
 
