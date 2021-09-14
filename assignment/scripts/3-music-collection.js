@@ -85,60 +85,35 @@ const searchTestObj = {
   year: 2021
 }
 
-function search(obj) {
+function search(searchTerms) {
   const result = []; // array to store all found records
-  for (const item of collection) { // loop through collection
-    // test whether artist and year is the same
-    if (obj.artist && obj.year && !(obj.trackName)) { // only given artist and year
-      if ((item.artist === obj.artist && item.yearPublished === obj.year)) {
-        result.push(item);
+  for (const item of collection) {
+    let count = 0; // keeps track of the number of proprerties in the searchTerms object
+    let hits = 0; // keeps track of the number of hits of the current item vs the searchTerms
+    for (const searchTerm in searchTerms) {
+      if (searchTerm === 'artist' && searchTerms[searchTerm] === item.artist) {
+        hits++;
       }
-    } else if (obj.trackName && !(obj.artist) && !(obj.year)) { // end if only given artist and year
-      if (item.tracks) { // will only search if the record has tracks listed
-        for (const track of item.tracks) {
-          if (track.name === obj.trackName) {
-            result.push(item);
-          }
-        } // end for tracks loop
-      } // end if item.tracks
-    } else if (obj.trackName && obj.artist && obj.year) { // end else if only track
-      if (item.tracks) { // will only search if the record has tracks listed
-        for (const track of item.tracks) {
-          if (track.name === obj.trackName && item.artist === obj.artist && item.yearPublished === obj.year) {
-            result.push(item);
-          }
-        } // end for tracks loop
-      } // end if item.tracks
-    } else if (obj.artist && !(obj.year) && !(obj.trackName)) { // end else if all three criteria given
-      if (obj.artist === item.artist) {
-        result.push(item);
+      if (searchTerm === 'year' && searchTerms[searchTerm] === item.yearPublished) {
+        hits++;
       }
-    } else if (obj.year && !(obj.artist) && !(obj.trackName)) {
-      if (obj.year === item.yearPublished) {
-        result.push(item);
-      }
-    } else if (obj.artist && obj.trackName && !(obj.year)) {
-      if (item.tracks) { // will only search if the record has tracks listed
+      if (searchTerm === 'trackName' && item.tracks) { // will only search if the record has tracks listed
         for (const track of item.tracks) {
-          if (track.name === obj.trackName && item.artist === obj.artist) {
-            result.push(item);
-          }
-        } // end for tracks loop
-      } // end if item.tracks
-    } else if (obj.year && obj.trackName && !(obj.artist)) {
-      if (item.tracks) { // will only search if the record has tracks listed
-
-        for (const track of item.tracks) {
-          if (track.name === obj.trackName && item.yearPublished === obj.year) {
-            result.push(item);
-          }
-        }
-      } // end for tracks loop
-    } // end if item.tracks
-
-  }
+          if (track.name === searchTerms[searchTerm]) {
+            hits++; // assuming there will only be one track with the same name in the current record
+          } // end for tracks loop
+        } // end if item.tracks
+      } // end trackName searchTerm
+      count++;
+    } // end searchTerm in searchTerms loop
+    if (count === hits) { // hurray! an exact match
+      result.push(item);
+    }
+  } // end item of collection loop
   return result;
-}
+} // end search()
+
+
 
 // tests for search()
 console.log('TESTS FOR SEARCH');
@@ -175,29 +150,29 @@ console.log(showCollection(search({
   year: 2021,
   trackName: 'Grey'
 })));
-console.log('TEST 6');
+console.log('TEST 7');
 console.log('Should return 1 album - based on artist and trackName');
 console.log(showCollection(search({
   artist: 'The Fuzzy Smokes',
   trackName: 'Grey'
 })));
-console.log('TEST 7');
+console.log('TEST 8');
 console.log('Should return 3 albums - based on artist alone');
 console.log(showCollection(search({
   artist: 'The Office Workers'
 })));
-console.log('TEST 8');
+console.log('TEST 9');
 console.log('Should return 2 albums - based on year alone');
 console.log(showCollection(search({
   year: 2021
 })));
-console.log('TEST 9');
+console.log('TEST 10');
 console.log('Should return 0 albums - year correct, but track not');
 console.log(showCollection(search({
   year: 2021,
   trackName: 'Hide! Hide!'
 })));
-console.log('TEST 10');
+console.log('TEST 11');
 console.log('Should return 0 albums - artist correct, but track not');
 console.log(showCollection(search({
   artist: 'The Office Workers',
