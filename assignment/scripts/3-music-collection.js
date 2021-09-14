@@ -89,17 +89,30 @@ function search(obj) {
   const result = []; // array to store all found records
   for (const item of collection) { // loop through collection
     // test whether artist and year is the same
-    if (item.artist === obj.artist && item.yearPublished === obj.year) {
-      result.push(item);
-    }
-    if (item.tracks) { // will only search if the record has tracks listed
-      for (const track of item.tracks) {
-        if (track.name === obj.trackName) {
-          result.push(item);
-        }
+    if (obj.artist && obj.year && !(obj.trackName)) { // only given artist and year
+      if ((item.artist === obj.artist && item.yearPublished === obj.year)) {
+        result.push(item);
       }
-    }
+    } else if (obj.trackName && !(obj.artist) && !(obj.year)) { // end if only given artist and year
+      if (item.tracks) { // will only search if the record has tracks listed
+        for (const track of item.tracks) {
+          if (track.name === obj.trackName) {
+            result.push(item);
+          }
+        } // end for tracks loop
+      } // end if item.tracks
+    } else if (obj.trackName && obj.artist && obj.year) { // end else if only track
+      if (item.tracks) { // will only search if the record has tracks listed
+        for (const track of item.tracks) {
+          if (track.name === obj.trackName && item.artist === obj.artist && item.yearPublished === obj.year) {
+            result.push(item);
+          }
+        } // end for tracks loop
+      } // end if item.tracks
+    } // end else if all three criteria given
   }
+
+  console.log('result', result);
   return result;
 }
 
@@ -130,6 +143,8 @@ console.log(showCollection(search({
 console.log('TEST 5');
 console.log('Should return 1 album - based on track name');
 console.log(showCollection(search({
+  artist: 'The Fuzzy Smokes',
+  year: 2021,
   trackName: 'Grey'
 })));
 
