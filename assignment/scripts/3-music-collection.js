@@ -56,3 +56,49 @@ console.log('Test: should return one record by F. Alse Etto:', findByArtist('F. 
 addToCollection("Sit. Type. Meet.", "The Office Workers", 2007);
 addToCollection("Thank Goodness It's Lunch", "The Office Workers", 2013);
 console.log('Test: should return three records by The Office Workers', findByArtist('The Office Workers'));
+
+// test for multiple records with search, add another album
+addToCollection("Much", "The Fuzzy Smokes", 2021);
+const searchTestObj = {
+  artist: 'The Fuzzy Smokes',
+  year: 2021
+}
+
+function search(obj) {
+  const result = []; // array to store all found records
+  for (const item of collection) { // loop through collection
+    // test whether artist and year is the same
+    if (item.artist === obj.artist && item.yearPublished === obj.year) {
+      result.push(item);
+    }
+  }
+  return result;
+}
+
+// tests for search()
+console.log('TESTS FOR SEARCH');
+console.log('TEST 1');
+console.log('Should return 2 Fuzzy Smokes albums from 1987 and 2021:');
+console.log(showCollection(search(searchTestObj)));
+console.log('TEST 2');
+console.log('Should return 1 Deaff Platinum album from 1987:');
+console.log(search({
+  artist: 'Deaff Platinum',
+  year: 1987
+}));
+console.log('TEST 3');
+console.log('Should return 0 albums - both artist and year not in collection');
+console.log(showCollection(search({
+  artist: 'The Nowheres',
+  year: 1903
+})));
+console.log('TEST 4');
+console.log('Should return 0 albums - artist in collection, but not year');
+console.log(search({
+  artist: 'Deaff Platinum',
+  year: 2012
+}));
+
+
+
+//end of file
