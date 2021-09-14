@@ -2,13 +2,14 @@ console.log('***** Music Collection *****')
 
 const collection = [];
 
-
 function addToCollection(title, artist, yearPublished) {
+  // define the new record as an object
   const newRecord = {
     title,
     artist,
     yearPublished
   }
+  // add this record object to the collection
   collection.push(newRecord);
   return newRecord;
 }
@@ -29,12 +30,13 @@ console.log('The complete music collection: ', collection);
 
 function showCollection(collectionArray) {
   console.log(`There are ${collectionArray.length} items in this collection.`);
+  // will only print the details of the collection if there are any items in collection
   if (collectionArray.length > 0) {
     console.log('-----------------');
     console.log('These items are:');
     console.log('-----------------');
 
-    for (const item of collectionArray) {
+    for (const item of collectionArray) { // loop through given collection
       console.log(`"${item.title}" by ${item.artist}, published in ${item.yearPublished}`);
     }
   }
