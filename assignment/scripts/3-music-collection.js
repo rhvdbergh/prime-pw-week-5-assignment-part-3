@@ -8,7 +8,7 @@ function addToCollection(title, artist, yearPublished, tracks) {
     title,
     artist,
     yearPublished,
-    tracks
+    tracks // defined as: [{name , duration}] --> array of track objects; track objects have name and duration properties
   }
   // add this record object to the collection
   collection.push(newRecord);
@@ -45,6 +45,13 @@ function showCollection(collectionArray) {
 
     for (const item of collectionArray) { // loop through given collection
       console.log(`"${item.title}" by ${item.artist}, published in ${item.yearPublished}`);
+      if (item.tracks) { // only display if tracks are listed
+        let counter = 1; // counts number of track
+        for (const track of item.tracks) {
+          console.log(`${counter}. ${track.name}: ${track.duration}`);
+          counter++;
+        }
+      }
     }
   }
 }
