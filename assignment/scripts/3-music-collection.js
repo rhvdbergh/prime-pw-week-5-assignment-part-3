@@ -90,6 +90,13 @@ function search(obj) {
     if (item.artist === obj.artist && item.yearPublished === obj.year) {
       result.push(item);
     }
+    if (item.tracks) { // will only search if the record has tracks listed
+      for (const track of item.tracks) {
+        if (track.name === obj.trackName) {
+          result.push(item);
+        }
+      }
+    }
   }
   return result;
 }
@@ -116,6 +123,12 @@ console.log('Should return 0 albums - artist in collection, but not year');
 console.log(showCollection(search({
   artist: 'Deaff Platinum',
   year: 2012
+})));
+
+console.log('TEST 5');
+console.log('Should return 1 album - based on track name');
+console.log(showCollection(search({
+  trackName: 'Grey'
 })));
 
 
