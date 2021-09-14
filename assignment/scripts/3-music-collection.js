@@ -109,10 +109,34 @@ function search(obj) {
           }
         } // end for tracks loop
       } // end if item.tracks
-    } // end else if all three criteria given
-  }
+    } else if (obj.artist && !(obj.year) && !(obj.trackName)) { // end else if all three criteria given
+      if (obj.artist === item.artist) {
+        result.push(item);
+      }
+    } else if (obj.year && !(obj.artist) && !(obj.trackName)) {
+      if (obj.year === item.yearPublished) {
+        result.push(item);
+      }
+    } else if (obj.artist && obj.trackName && !(obj.year)) {
+      if (item.tracks) { // will only search if the record has tracks listed
+        for (const track of item.tracks) {
+          if (track.name === obj.trackName && item.artist === obj.artist) {
+            result.push(item);
+          }
+        } // end for tracks loop
+      } // end if item.tracks
+    } else if (obj.year && obj.trackName && !(obj.artist)) {
+      if (item.tracks) { // will only search if the record has tracks listed
 
-  console.log('result', result);
+        for (const track of item.tracks) {
+          if (track.name === obj.trackName && item.yearPublished === obj.year) {
+            result.push(item);
+          }
+        }
+      } // end for tracks loop
+    } // end if item.tracks
+
+  }
   return result;
 }
 
@@ -143,10 +167,43 @@ console.log(showCollection(search({
 console.log('TEST 5');
 console.log('Should return 1 album - based on track name');
 console.log(showCollection(search({
-  artist: 'The Fuzzy Smokes',
+  trackName: 'Grey'
+})));
+console.log('TEST 6');
+console.log('Should return 1 album - based on year and trackName');
+console.log(showCollection(search({
   year: 2021,
   trackName: 'Grey'
 })));
+console.log('TEST 6');
+console.log('Should return 1 album - based on artist and trackName');
+console.log(showCollection(search({
+  artist: 'The Fuzzy Smokes',
+  trackName: 'Grey'
+})));
+console.log('TEST 7');
+console.log('Should return 3 albums - based on artist alone');
+console.log(showCollection(search({
+  artist: 'The Office Workers'
+})));
+console.log('TEST 8');
+console.log('Should return 2 albums - based on year alone');
+console.log(showCollection(search({
+  year: 2021
+})));
+console.log('TEST 9');
+console.log('Should return 0 albums - year correct, but track not');
+console.log(showCollection(search({
+  year: 2021,
+  trackName: 'Hide! Hide!'
+})));
+console.log('TEST 10');
+console.log('Should return 0 albums - artist correct, but track not');
+console.log(showCollection(search({
+  artist: 'The Office Workers',
+  trackName: 'Hide! Hide!'
+})));
+
 
 
 
