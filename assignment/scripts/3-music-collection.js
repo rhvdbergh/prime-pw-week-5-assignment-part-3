@@ -9,6 +9,7 @@ function addToCollection(title, artist, yearPublished, tracks) {
     artist,
     yearPublished,
     tracks // defined as: [{name , duration}] --> array of track objects; track objects have name and duration properties
+    // tracks is not a required property for other functions to work
   }
   // add this record object to the collection
   collection.push(newRecord);
@@ -22,6 +23,7 @@ let record = addToCollection("The Clouds Are Abrightening", "The Fuzzy Smokes", 
   name: "Grey",
   duration: "3:21"
 }]);
+// add records to test function
 console.log(`A new record has been added, check it out: ${record.title}, ${record.artist}, ${record.yearPublished}`);
 record = addToCollection("Snacks for Godzilla", "Deaff Platinum", 1987);
 console.log(`A new record has been added, and it's a classic: ${record.title}, ${record.artist}, ${record.yearPublished}`);
@@ -48,7 +50,7 @@ function showCollection(collectionArray) {
       if (item.tracks) { // only display if tracks are listed
         let counter = 1; // counts number of track
         for (const track of item.tracks) {
-          console.log(`${counter}. ${track.name}: ${track.duration}`);
+          console.log(`  ${counter}. ${track.name}: ${track.duration}`);
           counter++;
         }
       }
