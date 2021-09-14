@@ -2,19 +2,26 @@ console.log('***** Music Collection *****')
 
 const collection = [];
 
-function addToCollection(title, artist, yearPublished) {
+function addToCollection(title, artist, yearPublished, tracks) {
   // define the new record as an object
   const newRecord = {
     title,
     artist,
-    yearPublished
+    yearPublished,
+    tracks
   }
   // add this record object to the collection
   collection.push(newRecord);
   return newRecord;
 }
 
-let record = addToCollection("The Clouds Are Abrightening", "The Fuzzy Smokes", 2021);
+let record = addToCollection("The Clouds Are Abrightening", "The Fuzzy Smokes", 2021, [{
+  name: "The Haze",
+  duration: "5:31"
+}, {
+  name: "Grey",
+  duration: "3:21"
+}]);
 console.log(`A new record has been added, check it out: ${record.title}, ${record.artist}, ${record.yearPublished}`);
 record = addToCollection("Snacks for Godzilla", "Deaff Platinum", 1987);
 console.log(`A new record has been added, and it's a classic: ${record.title}, ${record.artist}, ${record.yearPublished}`);
