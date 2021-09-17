@@ -25,7 +25,16 @@ let record = addToCollection("The Clouds Are Abrightening", "The Fuzzy Smokes", 
 }]);
 // add records to test function
 console.log(`A new record has been added, check it out: ${record.title}, ${record.artist}, ${record.yearPublished}`);
-record = addToCollection("Snacks for Godzilla", "Deaff Platinum", 1987);
+record = addToCollection("Snacks for Godzilla", "Deaff Platinum", 1987, [{
+  name: "People Like Ants",
+  duration: "3:45"
+}, {
+  name: "Those Boxy Metal Things Are Crunchy",
+  duration: "2:21"
+}, {
+  name: "Toothpicks",
+  duration: "3:21"
+}]);
 console.log(`A new record has been added, and it's a classic: ${record.title}, ${record.artist}, ${record.yearPublished}`);
 record = addToCollection("The Greatest Nursery Rhymes Set to Song", "The Happy Chappies", 2011);
 console.log(`A new record has been added, great for kids: ${record.title}, ${record.artist}, ${record.yearPublished}`);
